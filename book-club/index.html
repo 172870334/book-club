@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>读书会</title>
+  <style>
+    body { font-family: Arial; max-width: 800px; margin: 0 auto; }
+    .book { border: 1px solid #ddd; padding: 10px; margin: 10px; }
+  </style>
+</head>
+<body>
+  <h1>读书会</h1>
+  <div id="books"></div>
+
+  <script>
+   // 从API获取书籍数据
+fetch('http://localhost:3001/books')
+  .then(response => response.json())
+  .then(books => {
+    const booksContainer = document.getElementById('books');
+    books.forEach(book => {
+      const bookElement = document.createElement('div');
+      bookElement.className = 'book';
+      bookElement.innerHTML = `
+        <h3>${book.title}</h3>
+        <p>作者：${book.author}</p>
+      `;
+      booksContainer.appendChild(bookElement);
+    });
+  });
+  </script>
+</body>
+</html>
